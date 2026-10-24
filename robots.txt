@@ -1,0 +1,19 @@
+# Let search engines and AI search assistants read these pages, so they can quote and recommend the apps.
+# Crawlers only read this file at the root of a domain (https://example.com/robots.txt). On a GitHub Pages
+# project site (username.github.io/apps/) it is ignored, and with no robots.txt at the root every crawler
+# may read the site anyway.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: *
+Allow: /
