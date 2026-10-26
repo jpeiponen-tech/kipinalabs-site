@@ -17,3 +17,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://kipinalabs.com/sitemap.xml
