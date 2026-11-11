@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>METAR and TAF decoder for Part 107 drone pilots | Sourced 107</title>
+<meta name="description" content="Paste a METAR or TAF and read it in plain English, with the flight category and a check against the Part 107 weather minimums. Free, no sign-up.">
+<link rel="canonical" href="https://kipinalabs.com/sourced107/metar-decoder/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kipina Labs">
+<meta property="og:title" content="METAR and TAF decoder for Part 107 drone pilots">
+<meta property="og:description" content="Paste a METAR or TAF and read it in plain English, with the flight category and a check against the Part 107 weather minimums.">
+<meta property="og:url" content="https://kipinalabs.com/sourced107/metar-decoder/">
+<meta property="og:image" content="https://kipinalabs.com/assets/sourced107-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1114" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "What's the difference between a METAR and a TAF?",
+    "acceptedAnswer": { "@type": "Answer", "text": "A METAR reports the weather observed at an airport, usually once an hour; a SPECI is an extra report when conditions change. A TAF is a forecast for the area within 5 statute miles of the airport, usually covering 24 or 30 hours." }
+   },
+   {
+    "@type": "Question",
+    "name": "What weather does Part 107 require?",
+    "acceptedAnswer": { "@type": "Answer", "text": "Under 14 CFR 107.51, flight visibility from where you control the drone must be at least 3 statute miles, and the drone must stay at least 500 feet below and 2,000 feet horizontally from clouds. It must also stay at or below 400 feet above ground level, unless it's within a 400-foot radius of a structure." }
+   },
+   {
+    "@type": "Question",
+    "name": "Are cloud heights in a METAR above sea level?",
+    "acceptedAnswer": { "@type": "Answer", "text": "No. Cloud heights in a METAR and a TAF are above ground level at the station, in hundreds of feet: BKN015 means broken clouds at 1,500 feet above the airport." }
+   }
+  ]
+ }
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8822a" d="M11 2.5c.8 5.3 4.4 8.9 9.7 9.7-5.3.8-8.9 4.4-9.7 9.7-.8-5.3-4.4-8.9-9.7-9.7 5.3-.8 8.9-4.4 9.7-9.7z"/><circle cx="20.3" cy="3.9" r="1.7" fill="#e8822a"/></svg>Kipinä Labs</a>
+    <nav class="site-nav" aria-label="Apps"><a href="/hunch/">Hunch</a><a href="/sourced107/">Sourced 107</a></nav>
+  </div>
+</header>
+<main id="main" class="app-page s107">
+<section class="wrap tool-hero">
+  <a class="crumb" href="/sourced107/"><img src="/assets/sourced107-icon.png" alt="" width="32" height="32">Sourced 107</a>
+  <h1>METAR &amp; TAF decoder</h1>
+  <p class="lead">Paste an airport weather report and read it in plain English, with the flight category and a check against the Part 107 weather minimums.</p>
+  <form class="decoder" id="decoder">
+    <label for="report">METAR or TAF</label>
+    <textarea id="report" name="report" rows="3" spellcheck="false" autocapitalize="characters" autocomplete="off" placeholder="KAUS 111953Z 18012KT 10SM FEW045 27/14 A3001"></textarea>
+    <div class="decoder-actions">
+      <button type="submit">Decode</button>
+      <span class="examples" id="examples"><span>Try:</span></span>
+    </div>
+  </form>
+  <div id="result" class="result" aria-live="polite"></div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head"><h2>How a METAR reads</h2><p>The groups always come in the same order, so once you know the order, every report reads the same way.</p></div>
+  <ol class="read-order">
+    <li><code>KMDW</code><span><b>Station.</b> The airport's four-letter ICAO code.</span></li>
+    <li><code>111953Z</code><span><b>Time.</b> Day of the month, then hours and minutes in UTC (Zulu).</span></li>
+    <li><code>27015G25KT</code><span><b>Wind.</b> Direction it blows from, in degrees true, then speed and any gusts, in knots.</span></li>
+    <li><code>1 1/2SM</code><span><b>Visibility.</b> In statute miles. <code>P6SM</code> means more than 6.</span></li>
+    <li><code>-RA BR</code><span><b>Weather.</b> Intensity, then a descriptor and the phenomenon: light rain, and mist.</span></li>
+    <li><code>BKN015</code><span><b>Clouds.</b> Coverage and height above ground in hundreds of feet. The lowest broken or overcast layer is the ceiling.</span></li>
+    <li><code>M02/M04</code><span><b>Temperature and dew point.</b> In °C; <code>M</code> means minus. A small spread means fog or low clouds are likely.</span></li>
+    <li><code>A2992</code><span><b>Altimeter setting.</b> In inches of mercury: 29.92.</span></li>
+    <li><code>RMK</code><span><b>Remarks.</b> Extra details, such as the station type or exact temperature.</span></li>
+  </ol>
+</section>
+
+<section class="wrap section">
+  <div class="cards two">
+    <div class="card cta">
+      <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 10a4 4 0 0 1-.5 8z"/></svg></div>
+      <h3>Weather is on the Part 107 test</h3>
+      <p>Sourced 107 has practice questions on reports, forecasts and weather effects. Every answer quotes the FAA source it comes from, word for word.</p>
+      <a class="more" href="/sourced107/">About Sourced 107</a>
+    </div>
+    <div class="card">
+      <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></div>
+      <h3>Part 107 weather minimums</h3>
+      <ul>
+        <li>At least 3 statute miles of flight visibility from where you control the drone</li>
+        <li>At least 500 ft below and 2,000 ft horizontally from clouds</li>
+        <li>At or below 400 ft above ground, unless within 400 ft of a structure</li>
+      </ul>
+      <p class="fine">14 CFR 107.51</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" aria-labelledby="faq">
+  <div class="section-head"><h2 id="faq">Questions</h2></div>
+  <div class="faq">
+    <details><summary>What's the difference between a METAR and a TAF?</summary><p>A METAR reports the weather observed at an airport, usually once an hour; a SPECI is an extra report when conditions change. A TAF is a forecast for the area within 5 statute miles of the airport, usually covering 24 or 30 hours.</p></details>
+    <details><summary>What weather does Part 107 require?</summary><p>Under 14 CFR 107.51, flight visibility from where you control the drone must be at least 3 statute miles, and the drone must stay at least 500 feet below and 2,000 feet horizontally from clouds. It must also stay at or below 400 feet above ground level, unless it's within a 400-foot radius of a structure.</p></details>
+    <details><summary>Are cloud heights in a METAR above sea level?</summary><p>No. Cloud heights in a METAR and a TAF are above ground level at the station, in hundreds of feet: <code>BKN015</code> means broken clouds at 1,500 feet above the airport.</p></details>
+    <details><summary>Where do I get current reports?</summary><p>The FAA's Aviation Weather Center publishes them at <a href="https://aviationweather.gov">aviationweather.gov</a>. Paste one here to read it.</p></details>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="note">For study. Before you fly, get current weather from an official source such as aviationweather.gov. Reports describe the airport, not necessarily where you'll fly. This page isn't affiliated with or endorsed by the FAA, and what you paste stays in your browser.</p>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8822a" d="M11 2.5c.8 5.3 4.4 8.9 9.7 9.7-5.3.8-8.9 4.4-9.7 9.7-.8-5.3-4.4-8.9-9.7-9.7 5.3-.8 8.9-4.4 9.7-9.7z"/><circle cx="20.3" cy="3.9" r="1.7" fill="#e8822a"/></svg>Kipinä Labs</a>
+      <p>Small iPhone apps that show their work. Kipinä is Finnish for spark.</p>
+      <p><a href="mailto:support@kipinalabs.com">support@kipinalabs.com</a></p>
+      <p>© 2026 Kipina Labs LLC, Georgia, USA.<br>This site sets no cookies and runs no analytics.</p>
+    </div>
+    <div>
+      <h2>Hunch</h2>
+      <ul><li><a href="/hunch/">About Hunch</a></li><li><a href="/hunch/support.html">Support</a></li><li><a href="/hunch/privacy.html">Privacy policy</a></li><li><a href="/hunch/consumer-health-data.html">Consumer health data policy</a></li></ul>
+    </div>
+    <div>
+      <h2>Sourced 107</h2>
+      <ul><li><a href="/sourced107/">About Sourced 107</a></li><li><a href="/sourced107/metar-decoder/">METAR &amp; TAF decoder</a></li><li><a href="/sourced107/support.html">Support</a></li><li><a href="/sourced107/privacy.html">Privacy policy</a></li></ul>
+    </div>
+  </div>
+</footer>
+<script src="metar.js"></script>
+<script>
+(function () {
+  "use strict";
+  var EXAMPLES = [
+    ["Clear day", "METAR KAUS 111953Z 18012KT 10SM FEW045 27/14 A3001 RMK AO2 SLP158"],
+    ["Rain and mist", "METAR KMDW 111953Z 27015G25KT 1 1/2SM -RA BR SCT008 BKN015 OVC030 M02/M04 A2992 RMK AO2 SLP132"],
+    ["Fog", "SPECI KSFO 111412Z 00000KT 1/4SM FG VV002 12/12 A3002 RMK AO2"],
+    ["TAF", "TAF KOKC 111740Z 1118/1218 18015G25KT P6SM SCT050\n  FM112200 20010KT 5SM -SHRA BKN030\n  TEMPO 1200/1204 2SM TSRA OVC015CB\n  BECMG 1212/1214 VRB05KT P6SM SKC"]
+  ];
+  var CATEGORY = {
+    VFR: "Visual flight rules: ceiling above 3,000 ft and visibility over 5 miles",
+    MVFR: "Marginal VFR: ceiling 1,000 to 3,000 ft, or visibility 3 to 5 miles",
+    IFR: "Instrument flight rules: ceiling 500 to under 1,000 ft, or visibility 1 to under 3 miles",
+    LIFR: "Low IFR: ceiling under 500 ft, or visibility under 1 mile"
+  };
+  var form = document.getElementById("decoder"), input = document.getElementById("report"), out = document.getElementById("result");
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function badge(cat) {
+    var b = el("span", "cat cat-" + cat.code.toLowerCase(), cat.code);
+    b.title = CATEGORY[cat.code];
+    return b;
+  }
+
+  function itemList(items) {
+    var dl = el("dl", "decoded");
+    items.forEach(function (it) {
+      var row = el("div", it.title === "Not decoded" ? "row unknown" : "row");
+      var dt = el("dt");
+      dt.appendChild(el("code", null, it.code));
+      row.appendChild(dt);
+      var dd = el("dd");
+      dd.appendChild(el("b", null, it.title));
+      dd.appendChild(el("span", null, it.text));
+      row.appendChild(dd);
+      dl.appendChild(row);
+    });
+    return dl;
+  }
+
+  function glance(r, summary) {
+    var g = el("div", "glance");
+    var head = el("div", "glance-head");
+    head.appendChild(el("p", "glance-station", r.station + " · " + (r.kind === "TAF" ? "Forecast" : "Observation")));
+    if (summary && summary.category) {
+      var cat = el("div", "glance-cat");
+      cat.appendChild(badge(summary.category));
+      cat.appendChild(el("p", null, CATEGORY[summary.category.code] + (summary.category.partial ? " (no visibility reported, so judged on clouds alone)." : ".")));
+      head.appendChild(cat);
+    }
+    g.appendChild(head);
+    if (summary) {
+      var checks = MetarDecoder.part107(summary);
+      if (checks.length) {
+        var ul = el("ul", "checks107");
+        ul.setAttribute("aria-label", "Part 107 weather minimums");
+        checks.forEach(function (c) {
+          var li = el("li", c.ok ? "ok" : "no");
+          li.appendChild(el("span", "mark", c.ok ? "Meets" : "Below"));
+          var t = el("span", null, c.text + " ");
+          t.appendChild(el("small", null, c.rule));
+          li.appendChild(t);
+          ul.appendChild(li);
+        });
+        g.appendChild(ul);
+      }
+    }
+    return g;
+  }
+
+  function render(text) {
+    out.textContent = "";
+    var r;
+    try { r = MetarDecoder.decode(text); }
+    catch (e) { out.appendChild(el("p", "error", e.message)); return; }
+
+    if (r.kind === "TAF") {
+      var g = glance(r, null), strip = el("ol", "strip");
+      strip.setAttribute("aria-label", "Flight category through the forecast");
+      r.periods.forEach(function (p) {
+        if (!p.summary.category) return;
+        var li = el("li");
+        li.appendChild(badge(p.summary.category));
+        li.appendChild(el("span", null, p.code ? p.code.split(" ")[0].replace(/^FM.*/, "From " + p.code.slice(4, 6) + ":" + p.code.slice(6, 8)) : "Start"));
+        strip.appendChild(li);
+      });
+      g.appendChild(strip);
+      out.appendChild(g);
+      out.appendChild(itemList(r.items));
+      var list = el("ol", "periods");
+      r.periods.forEach(function (p) {
+        var li = el("li", "period");
+        var d = el("details");
+        d.open = true;
+        var s = el("summary");
+        if (p.summary.category) s.appendChild(badge(p.summary.category));
+        var label = el("span", "period-title");
+        label.appendChild(el("b", null, p.title));
+        label.appendChild(el("span", null, p.text));
+        s.appendChild(label);
+        d.appendChild(s);
+        if (p.code) d.appendChild(el("p", "period-code", p.code));
+        d.appendChild(itemList(p.items));
+        li.appendChild(d);
+        list.appendChild(li);
+      });
+      out.appendChild(list);
+    } else {
+      out.appendChild(glance(r, r.summary));
+      out.appendChild(itemList(r.items));
+    }
+  }
+
+  var ex = document.getElementById("examples");
+  EXAMPLES.forEach(function (e) {
+    var b = el("button", "chip", e[0]);
+    b.type = "button";
+    b.addEventListener("click", function () { input.value = e[1]; render(e[1]); });
+    ex.appendChild(b);
+  });
+  form.addEventListener("submit", function (e) { e.preventDefault(); render(input.value); });
+})();
+</script>
+</body>
+</html>
