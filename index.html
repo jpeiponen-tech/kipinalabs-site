@@ -14,7 +14,8 @@
 <meta property="og:image" content="https://kipinalabs.com/share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#faf8f4">
+<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1114" media="(prefers-color-scheme: dark)">
 <meta name="site-kind" content="software">
 <meta name="page-type" content="software">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
@@ -49,6 +50,16 @@
 <link rel="modulepreload" href="assets/moments/liquid-type/moment.js">
 <!-- page CSS: inside the visuals only (the phone frame round the real app screens), and the card group's --p-h -->
 <style>
+  :root { color-scheme: light dark; }
+  /* dark: the same tokens as style.css's dark block, so the home page and the app pages match */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --p-bg: #0e1114; --p-surface: #161a1f; --p-ink: #eef1f4; --p-muted: #a3acb7;
+      --p-accent: #f59d4c; --p-accent-ink: #15191f;
+      --p-inv-bg: #1b2026; --p-inv-surface: #242a31; --p-inv-ink: #eef1f4; --p-inv-muted: #a3acb7;
+      --ground-bg: #2a251f; --ground-surface: #342e27; --ground-ink: #eee6da; --ground-muted: #b8ad9e; --ground-accent: #d6a26b;
+    }
+  }
   .nav__logo svg { width: 22px; height: 22px; flex: none; }
   .phone, .frame > .phone { position: absolute; width: 280px; padding: 9px; border-radius: 46px; background: #0c0e11; }
   .phone > img { display: block; width: 100%; height: auto; border-radius: 37px; }
