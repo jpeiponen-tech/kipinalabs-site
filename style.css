@@ -13,6 +13,8 @@
   --hunch-soft: #e1f1ef;
   --s107: #1d5fae;
   --s107-soft: #e4edf9;
+  --s608: #8a5a00;
+  --s608-soft: #f6ecd6;
   --shadow: 0 1px 2px rgba(21, 25, 31, .05), 0 12px 32px -12px rgba(21, 25, 31, .18);
   --radius: 22px;
   --ok: #0a6129;
@@ -37,6 +39,8 @@
     --hunch-soft: #0f2c2a;
     --s107: #74abee;
     --s107-soft: #142439;
+    --s608: #f2c46b;
+    --s608-soft: #2b2210;
     --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 16px 40px -16px rgba(0, 0, 0, .7);
     --ok: #7fd69a;
     --ok-soft: #13301d;
@@ -215,6 +219,7 @@ h1, h2, h3 {
 
 .app-page.hunch { --accent: var(--hunch); --tint: var(--hunch-soft); }
 .app-page.s107 { --accent: var(--s107); --tint: var(--s107-soft); }
+.app-page.s608 { --accent: var(--s608); --tint: var(--s608-soft); }
 
 .app-hero { display: grid; gap: 40px; padding-top: 32px; padding-bottom: 24px; align-items: center; }
 @media (min-width: 880px) { .app-hero { grid-template-columns: 1.1fr .9fr; padding-top: 64px; padding-bottom: 40px; } }
