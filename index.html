@@ -74,6 +74,11 @@
     .hero__media .phone { translate: none; left: calc(50% - var(--s-3)); translate: -100% 0; }
     .hero__media .phone--2 { display: block; left: calc(50% + var(--s-3)); translate: none; }
   }
+  /* short landscape screens (iPad landscape, 1366x768 laptops): tighter rhythm so sections stay whole screens */
+  @media (min-width: 1024px) and (max-height: 800px) {
+    :root { --padt: 96px; --padb: 36px; --head-gap: 40px; }
+    #hunch .panel { --p-h: 300px; }
+  }
   .hero__media .ly-float { left: auto; bottom: auto; right: var(--s-5); top: var(--s-5); width: 210px; }
   .ly-float q { font-size: var(--t-small); color: var(--ink); quotes: "\201C" "\201D"; }
   #privacy .frame .phone { left: calc(50% - 150px); top: 48px; width: 300px; }
