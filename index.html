@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kipina Labs: iPhone apps for sleep tests and drone exams</title>
-<meta name="description" content="Hunch tests one sleep habit for 14 nights. Sourced 107 quotes the FAA rule behind every Part 107 answer. No accounts, no ads, no tracking.">
+<title>Kipina Labs: iPhone apps for sleep tests and trade exams</title>
+<meta name="description" content="Hunch tests one sleep habit for 14 nights. Sourced 107 and Sourced 608 quote the FAA or EPA rule behind every exam answer. No accounts, no ads, no tracking.">
 <link rel="canonical" href="https://kipinalabs.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kipina Labs">
-<meta property="og:title" content="Kipina Labs: iPhone apps for sleep tests and drone exams">
-<meta property="og:description" content="Hunch tests one sleep habit for 14 nights. Sourced 107 quotes the FAA rule behind every Part 107 answer.">
+<meta property="og:title" content="Kipina Labs: iPhone apps for sleep tests and trade exams">
+<meta property="og:description" content="Hunch tests one sleep habit for 14 nights. Sourced 107 and Sourced 608 quote the FAA or EPA rule behind every exam answer.">
 <meta property="og:url" content="https://kipinalabs.com/">
 <meta property="og:image" content="https://kipinalabs.com/share.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -71,6 +71,7 @@
   @media (min-width: 640px) and (max-width: 1023px) {
     #sourced107 .frame--split, #privacy .frame--split { --ratio: 46%; }
     #hunch .card .panel { --p-h: calc(100svh - 620px); }
+    #sourced608 .panel { --p-h: 440px; }
     .hero__media .phone { translate: none; left: calc(50% - var(--s-3)); translate: -100% 0; }
     .hero__media .phone--2 { display: block; left: calc(50% + var(--s-3)); translate: none; }
   }
@@ -90,11 +91,16 @@
   #hunch .panel { --p-h: 340px; }
   #hunch .panel .phone { left: calc(50% - 140px); top: 32px; }
   #sourced107 .frame .phone { left: calc(50% - 140px); top: 56px; }
+  #sourced608 .panel { --p-h: 340px; }
+  #sourced608 .panel .phone { left: calc(50% - 140px); top: 32px; }
   .frame:has(> .phone) { overflow: hidden; background: var(--ground-bg); border-color: transparent; }
   @media (max-width: 639px) {
     #hunch .card .panel { --p-h: 212px; }
     #hunch-h .muted { display: none; }
     #hunch .card p { display: none; }
+    #sourced608 .panel { --p-h: 212px; }
+    #sourced608 .card p, #s608-h .muted { display: none; }
+    #sourced608 .card:nth-of-type(2) { display: none; }   /* one phone screen holds one card */
     #sourced107 .frame--split, #privacy .frame--split { --ratio: 50%; }
     #sourced107 .t-lead { display: none; }   /* the h2 says it; keeps the section to one phone screen */
     #sourced107 .frame--split { --ratio: 60%; }
@@ -131,6 +137,11 @@
               <span class="t-card">Sourced 107</span>
               <span class="t-small muted">Part 107 practice that quotes the FAA rule</span>
             </a>
+            <a class="menu-card span-4" href="sourced608/">
+              <div class="panel"><img class="frame__img" src="assets/s608-01-today.jpg" alt="Sourced 608's Today screen with a dial for each section" width="600" height="1304" style="object-position: 50% 14%" loading="lazy"></div>
+              <span class="t-card">Sourced 608</span>
+              <span class="t-small muted">EPA 608 practice that quotes the EPA rule</span>
+            </a>
           </div>
         </div>
       </div>
@@ -150,8 +161,8 @@
   <section class="hero hero--split" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text grid hero__grid">
       <div class="hero__text span-5">
-        <h1 id="hero-h">Two iPhone apps: sleep tests and drone exams</h1>
-        <p class="hero__lead">Hunch tests one habit for 14 nights and shows whether your sleep moved. Sourced 107 quotes the FAA rule behind every Part 107 answer.</p>
+        <h1 id="hero-h">iPhone apps for sleep tests and trade exams</h1>
+        <p class="hero__lead">Hunch tests one habit for 14 nights and shows whether your sleep moved. Sourced 107 and Sourced 608 quote the FAA or EPA rule behind every exam answer.</p>
         <div class="btn-row"><a class="btn btn--primary" href="#hunch">See the apps<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
       </div>
       <div class="hero__media span-6 start-7" data-visual>
@@ -222,10 +233,31 @@
     <div class="wrap grid">
       <div data-moment="liquid-type" class="section-head span-5" style="max-width: none">
         <h2 id="privacy-h" class="mo-lt__type">Your data stays on your iPhone</h2>
-        <p class="t-lead">Both apps do their work on your iPhone. There are no accounts, no ads and no analytics, and neither app sends us what you enter.</p>
+        <p class="t-lead">All three apps do their work on your iPhone. There are no accounts, no ads and no analytics, and no app sends us what you enter.</p>
       </div>
       <div class="frame frame--split span-6 start-7" data-visual>
         <div class="phone"><img src="assets/hunch-10-privacy-300.jpg" srcset="assets/hunch-10-privacy-300.jpg 300w, assets/hunch-10-privacy.jpg 600w" sizes="(max-width: 1023px) 240px, 312px" alt="Hunch's privacy screen: what it reads from Apple Health and how to delete it" width="600" height="1304" loading="lazy" data-source="client" data-subject="Hunch app screen"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sourced608" aria-labelledby="s608-h">
+    <div class="wrap">
+      <div class="section-head--split">
+        <h2 id="s608-h">Sourced 608 quotes the EPA rule behind each answer. <span class="muted">For the Section 608 HVAC test.</span></h2>
+        <a class="link" href="sourced608/">See Sourced 608</a>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-6 m-nolift">
+          <h3>A dial for each section of the 608 test</h3>
+          <p>Core, Type I, II and III, each read against the 70% pass mark.</p>
+          <div class="panel" data-visual><div class="phone"><img src="assets/s608-01-today-300.jpg" srcset="assets/s608-01-today-300.jpg 300w, assets/s608-01-today.jpg 600w" sizes="(max-width: 1023px) 240px, 280px" alt="Sourced 608's Today screen: dials for Core, Type I, Type II and Type III against the 70% pass mark" width="600" height="1304" loading="lazy" data-source="client" data-subject="Sourced 608 app screen"></div></div>
+        </article>
+        <article class="card card--row card--open span-6 m-nolift">
+          <h3>The 40 CFR 82 quote after each answer</h3>
+          <p>The passage the answer comes from, word for word, with its paragraph number.</p>
+          <div class="panel" data-visual><div class="phone"><img src="assets/s608-02-answer-300.jpg" srcset="assets/s608-02-answer-300.jpg 300w, assets/s608-02-answer.jpg 600w" sizes="(max-width: 1023px) 240px, 280px" alt="A Sourced 608 answer quoting 40 CFR 82.158(d)(7) on low-loss fittings" width="600" height="1304" loading="lazy" data-source="client" data-subject="Sourced 608 app screen"></div></div>
+        </article>
       </div>
     </div>
   </section>
@@ -234,14 +266,14 @@
     <div class="wrap grid">
       <div class="span-5 stack-5">
         <h2 id="faq-h">Questions</h2>
-        <div class="app-icons"><span class="app-icons__pair"><img src="assets/hunch-icon.png" alt="Hunch app icon" width="72" height="72" loading="lazy"><img src="assets/sourced107-icon.png" alt="Sourced 107 app icon" width="72" height="72" loading="lazy"></span><a class="link" href="mailto:support@kipinalabs.com">Email us</a></div>
+        <div class="app-icons"><span class="app-icons__pair"><img src="assets/hunch-icon.png" alt="Hunch app icon" width="72" height="72" loading="lazy"><img src="assets/sourced107-icon.png" alt="Sourced 107 app icon" width="72" height="72" loading="lazy"><img src="assets/sourced608-icon.png" alt="Sourced 608 app icon" width="72" height="72" loading="lazy"></span><a class="link" href="mailto:support@kipinalabs.com">Email us</a></div>
       </div>
       <div class="faq span-6 start-7">
-        <div class="faq__item"><h3>When are the apps on the App Store?</h3><p>Both are coming soon, for iPhone.</p></div>
-        <div class="faq__item"><h3>What do Hunch and Sourced 107 cost?</h3><p>Hunch's first experiment is free; Pro starts at $4.99 a month. Sourced 107 is free to try, then one purchase.</p></div>
-        <div class="faq__item"><h3>Do the apps need an account?</h3><p>No. Neither app has accounts.</p></div>
+        <div class="faq__item"><h3>When are the apps on the App Store?</h3><p>All three are coming soon, for iPhone.</p></div>
+        <div class="faq__item"><h3>What do Hunch and Sourced 107 cost?</h3><p>Hunch's first experiment is free; Pro starts at $4.99 a month. Sourced 107 and Sourced 608 are free to try, then one purchase.</p></div>
+        <div class="faq__item"><h3>Do the apps need an account?</h3><p>No. None of the apps has accounts.</p></div>
         <div class="faq__item"><h3>Is Hunch a medical device?</h3><p>No. It's a wellness app and doesn't diagnose or treat any condition.</p></div>
-        <div class="faq__item"><h3>Is Sourced 107 from the FAA?</h3><p>No. It's an independent study aid, not endorsed by the FAA or PSI.</p></div>
+        <div class="faq__item"><h3>Are Sourced 107 and Sourced 608 official?</h3><p>No. Both are independent study aids, not endorsed by the FAA, PSI or the EPA.</p></div>
       </div>
     </div>
   </section>
@@ -251,7 +283,7 @@
   <div class="wrap">
     <div class="closing__cta close--word">
       <div class="section-head--split">
-        <div><h2 id="close-h">See Hunch and Sourced 107</h2><p class="t-lead">Both coming soon to the App Store, for iPhone.</p></div>
+        <div><h2 id="close-h">See Hunch, Sourced 107 and Sourced 608</h2><p class="t-lead">All three coming soon to the App Store, for iPhone.</p></div>
         <a class="btn btn--primary" href="#hunch">See the apps<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
       <p class="close__word" aria-hidden="true">Kipinä Labs</p>
@@ -261,11 +293,12 @@
         <div class="span-4 stack-4">
           <a class="nav__logo" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8822a" d="M11 2.5c.8 5.3 4.4 8.9 9.7 9.7-5.3.8-8.9 4.4-9.7 9.7-.8-5.3-4.4-8.9-9.7-9.7 5.3-.8 8.9-4.4 9.7-9.7z"/><circle cx="20.3" cy="3.9" r="1.7" fill="#e8822a"/></svg>Kipinä Labs</a>
           <p class="footer__lede">Small iPhone apps that show their work.</p>
+          <a class="link" href="mailto:support@kipinalabs.com">Email us</a>
         </div>
         <div class="span-2 footer__col"><h3>Hunch</h3><ul><li><a href="hunch/">About Hunch</a></li><li><a href="hunch/support.html">Support</a></li><li><a href="hunch/privacy.html">Privacy policy</a></li><li><a href="hunch/consumer-health-data.html">Consumer health data</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Sourced 107</h3><ul><li><a href="sourced107/">About Sourced 107</a></li><li><a href="sourced107/support.html">Support</a></li><li><a href="sourced107/privacy.html">Privacy policy</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Sourced 608</h3><ul><li><a href="sourced608/">About Sourced 608</a></li><li><a href="sourced608/support.html">Support</a></li><li><a href="sourced608/privacy.html">Privacy policy</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Part 107 tools</h3><ul><li><a href="sourced107/part-107-faq/">Part 107 test FAQ</a></li><li><a href="sourced107/part-107-apps-compared/">Part 107 apps compared</a></li><li><a href="sourced107/metar-decoder/">METAR and TAF decoder</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>Studio</h3><ul><li><a href="mailto:support@kipinalabs.com">Email us</a></li></ul></div>
       </div>
       <div class="footer__legal">
         <span>&copy; 2026 Kipina Labs LLC, Georgia, USA. This site sets no cookies and runs no analytics.</span>
