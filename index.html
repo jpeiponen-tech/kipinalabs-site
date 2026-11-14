@@ -66,12 +66,14 @@
   .hero__media { background: var(--ground-bg); }
   .hero__media .phone { left: 40px; top: 36px; height: calc(100% - 72px); width: auto; }
   .hero__media .phone > img { height: 100%; width: auto; }
-  @media (max-width: 1279px) { .hero__media .ly-float { display: none; } .hero__media .phone { left: 50%; translate: -50% 0; } }
+  .hero__media .phone { left: 50%; translate: -50% 0; }
   .hero__media .phone--2 { display: none; }
+  #sourced608 .panel { --p-h: 340px; }
+  #sourced608 .panel .phone { left: calc(50% - 140px); top: 32px; }
   @media (min-width: 640px) and (max-width: 1023px) {
     #sourced107 .frame--split, #privacy .frame--split { --ratio: 46%; }
     #hunch .card .panel { --p-h: calc(100svh - 620px); }
-    #sourced608 .panel { --p-h: 440px; }
+    #sourced608 .panel { --p-h: 520px; }
     .hero__media .phone { translate: none; left: calc(50% - var(--s-3)); translate: -100% 0; }
     .hero__media .phone--2 { display: block; left: calc(50% + var(--s-3)); translate: none; }
   }
@@ -80,8 +82,6 @@
     :root { --padt: 96px; --padb: 36px; --head-gap: 40px; }
     #hunch .panel { --p-h: 300px; }
   }
-  .hero__media .ly-float { left: auto; bottom: auto; right: var(--s-5); top: var(--s-5); width: 210px; }
-  .ly-float q { font-size: var(--t-small); color: var(--ink); quotes: "\201C" "\201D"; }
   #privacy .frame .phone { left: calc(50% - 150px); top: 48px; width: 300px; }
   #privacy .mo-lt__type { font-size: clamp(44px, 6vw, 88px); }
   #faq .app-icons { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-5) var(--s-4); }
@@ -91,8 +91,6 @@
   #hunch .panel { --p-h: 340px; }
   #hunch .panel .phone { left: calc(50% - 140px); top: 32px; }
   #sourced107 .frame .phone { left: calc(50% - 140px); top: 56px; }
-  #sourced608 .panel { --p-h: 340px; }
-  #sourced608 .panel .phone { left: calc(50% - 140px); top: 32px; }
   .frame:has(> .phone) { overflow: hidden; background: var(--ground-bg); border-color: transparent; }
   @media (max-width: 639px) {
     #hunch .card .panel { --p-h: 212px; }
@@ -109,7 +107,6 @@
     #faq .app-icons .link { flex-basis: auto; }
     .hero__media .phone { top: 24px; height: calc(100% - 48px); }
     #sourced107 .frame .phone, #privacy .frame .phone { width: 280px; left: calc(50% - 140px); top: 32px; }
-    .hero__media .ly-float { display: none; }
   }
 </style>
 </head>
@@ -168,10 +165,6 @@
       <div class="hero__media span-6 start-7" data-visual>
         <div class="phone phone--2"><img src="assets/hunch-08-week-300.jpg" srcset="assets/hunch-08-week-300.jpg 300w, assets/hunch-08-week.jpg 600w" sizes="(max-width: 1023px) 240px, 312px" alt="Hunch's week view: sleep, heart rate variability and recovery for the last 7 days" width="600" height="1304" loading="lazy" data-source="client" data-subject="Hunch app screen"></div>
         <div class="phone"><img src="assets/hunch-01-today-300.jpg" srcset="assets/hunch-01-today-300.jpg 300w, assets/hunch-01-today.jpg 600w" sizes="(max-width: 1023px) 240px, 312px" alt="Hunch's Today screen: a finished 14-night experiment, yesterday's tag, and recovery, training load, stress and steps against your own normal" width="600" height="1304" fetchpriority="high" data-source="client" data-subject="Hunch app screen"></div>
-        <div class="ly-float">
-          <div class="ly-float__row"><span>Sourced 107</span><span>14 CFR 107.3</span></div>
-          <q>Small unmanned aircraft means an unmanned aircraft weighing less than 55 pounds on takeoff.</q>
-        </div>
       </div>
     </div></div>
   </section>
